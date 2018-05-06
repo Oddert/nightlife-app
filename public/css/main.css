@@ -8,6 +8,7 @@
 
 .feed img {
     max-width: 95%;
+    max-height: 300px;
 }
 
 .auth_gate-title {
@@ -25,7 +26,7 @@
 }
 
 .red {
-    border: 1px solid red;
+    border: 1px solid #bec3c7;
 }
 
 .homepage-back {
