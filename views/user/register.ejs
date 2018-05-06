@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+    <div class="main container text-center">
+        
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+        
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <h1 class="auth_gate-title">Sign Up!</h1>
+            <form action="/register" method="POST">
+                <div class="ui input auth_gate-input">
+                    <input type="text" name="username" placeholder="username" />
+                </div>
+                <div class="ui input auth_gate-input">
+                    <input type="password" name="password" placeholder="password" />
+                </div>
+                <button class="ui button teal massive auth_gate-button">Login</button>
+            </form>
+            <p>Already have an account? <a href='/register'>Login</a></p>
+        </div>
+    </div>
+
+<% include ../partials/footer %>

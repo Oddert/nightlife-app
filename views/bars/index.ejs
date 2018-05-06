@@ -1,0 +1,124 @@
+<% include ../partials/header %>
+
+    <div class="main container feed">
+        <h1>View Results</h1>
+        <div id="root"></div>
+    </div>
+    
+    <script type="text/babel">
+
+    var searchData = <%- JSON.stringify(searchData) %>
+    var locationData = <%- JSON.stringify(locationData) %>
+    
+    console.log(searchData);
+    console.log(locationData);
+    
+    var searchKeys = searchData.map(each => each.place_id);
+    var locationKeys = locationData.map(each => each.placeid);
+    
+    console.log(searchKeys);
+    console.log(locationKeys);
+    
+    
+    class Item extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.state = {
+                imageUrl: 'https://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png',
+                numHits: 0
+            }
+        }
+        
+        componentDidMount() {
+            var numHits = 0;
+            var thisPlaceId = this.props.item.place_id;
+            if (locationKeys.includes(thisPlaceId)) {
+                console.log(this.props.item.name, " found itself");
+                var locationIndex = 0;
+                locationData.map(function (each, index) {
+                    if (each.placeid == thisPlaceId) {
+                        locationIndex = index;
+                    }
+                });
+                for (var i=0; i<locationData[locationIndex].usersGoing.length; i++) {
+                    numHits ++;
+                }
+                this.setState({
+                    numHits: numHits
+                });
+                console.log(this.props.item.name, " has ", numHits, " prople going");
+            }
+            if (this.props.item.photos &&  this.props.item.photos.length > 0) {
+                var imageWidth = this.props.item.photos[0].width;
+                var imageRef = this.props.item.photos[0].photo_reference;
+                var getImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=" + imageWidth + "&photoreference=" + imageRef + "&key=AIzaSyA5vtIbo07AG10AbpSJjRd69lP9GaUZzTU";
+                // console.log(getImage);
+                this.setState({
+                    imageUrl: getImage
+                });
+            }
+        }
+        
+        render() {
+            var route = "/location/" + this.props.item.name;
+            var hits = this.state.numHits + " going";
+            // console.log(this.props.item.place_id);
+            return (
+                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 ui segment text-center">
+                    <img src="https://vignette.wikia.nocookie.net/project-pokemon/images/4/47/Placeholder.png/revision/latest?cb=20170330235552&format=original" />
+                    <h4>{this.props.item.name}</h4>
+                    <form action={route} method="POST">
+                        <input type="text" name="place_id" className="noShow" value={this.props.item.place_id} />
+                        <input type="submit" name="buttp" className="ui button" value={hits} />
+                    </form>
+                </div>
+            )
+        }
+    }
+    
+    class Row extends React.Component {
+        render() {
+            return (
+                <div>
+                    {this.props.row.map((each, index) => (
+                        <Item item={each} key={"col_" + index} />
+                    ))}
+                </div>
+            )
+        }
+    }
+    
+    class Output extends React.Component {
+        render() {
+            var afuCk = [1,2,3,4,5,6,7,8,9];
+            afuCk = searchData.slice();
+            var chunks = [],
+                i = 0,
+                n = afuCk.length,
+                len = 3;
+              while (i < n) {
+                chunks.push(afuCk.slice(i, i += len));
+              }
+            console.log(chunks);
+            
+            return (
+                <div>
+                    {chunks.map((each, index) => (
+                        <div className="row red" key={"row_" + index}>
+                            <Row row={each} />
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+    }
+    
+    
+        ReactDOM.render(
+            <Output />,
+            document.getElementById('root')
+          );
+          
+    </script>
+
+<% include ../partials/footer %>

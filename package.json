@@ -1,0 +1,31 @@
+{
+  "name": "nightlife-app",
+  "version": "1.0.0",
+  "description": "An app to display nightlife venues and display other users 'check-ins' for the second full stack FreeCodeCamp project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oddert/nightlife-app.git"
+  },
+  "author": "Robyn Veitch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oddert/nightlife-app/issues"
+  },
+  "homepage": "https://github.com/Oddert/nightlife-app#readme",
+  "dependencies": {
+    "bl": "^1.2.2",
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.9",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.17",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.0"
+  }
+}
