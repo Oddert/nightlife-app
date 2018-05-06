@@ -4,6 +4,7 @@
   "description": "An app to display nightlife venues and display other users 'check-ins' for the second full stack FreeCodeCamp project",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
