@@ -15,9 +15,9 @@ var express         = require('express'),
     
     indexRoutes     = require('./routes/index');
     
-
+var dburl = 'mongodb://' + process.env.MADE_WITH + ':' + process.env.SECRET + '@ds259499.mlab.com:59499/freecodecamp-playground';
 // mongoose.connect('mongodb://localhost/nightlife');    
-mongoose.connect('mongodb://Oddert:Bugatt1rulesoK@ds259499.mlab.com:59499/freecodecamp-playground');
+mongoose.connect(dburl);
     
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
